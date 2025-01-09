@@ -1,8 +1,8 @@
 import { Header } from "@/components/Header/Header";
+import { getUser } from "@/lib/dal/queries/users";
 
 export default async function Home() {
-  const result = await fetch("http://localhost:3000/api/user");
-  const user = await result.json();
+  const user = await getUser();
 
   return (
     <>
