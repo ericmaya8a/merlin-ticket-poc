@@ -109,7 +109,7 @@ export default function ParkingAndExtrasPage() {
             </Card>
 
             <Button asChild variant="destructive" className="h-12 w-[280px]">
-              <Link href="/confirmation">Continue</Link>
+              <Link href="/review">Continue</Link>
             </Button>
           </section>
         </section>
