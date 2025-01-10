@@ -14,15 +14,17 @@ export default function ReviewPage() {
   return (
     <>
       <Header />
-      <div className="flex min-h-screen flex-col items-center gap-6 py-10">
-        <BackButton href="/extras" title="Continue shopping" />
+      <div className="mx-auto flex w-[768px] flex-col gap-6 py-10">
+        <div>
+          <BackButton href="/extras" title="Continue shopping" />
+        </div>
 
-        <h1 className="mb-8 mt-4 scroll-m-20 text-3xl tracking-tight lg:text-5xl">
+        <h1 className="mb-8 mt-4 text-3xl lg:text-5xl">
           Review & complete your order
         </h1>
 
-        <section className="p-8">
-          <Card className="w-[768px] px-20">
+        <section className="">
+          <Card className="px-20">
             <CardHeader>
               <CardTitle>
                 <span className="text-3xl font-bold text-primary">
@@ -138,7 +140,7 @@ export default function ReviewPage() {
           </Card>
         </section>
 
-        <section className="w-[768px] py-8">
+        <section className="py-8">
           <h2 className="text-3xl font-bold text-primary">Payment</h2>
 
           <section className="mt-8">
@@ -171,9 +173,7 @@ export default function ReviewPage() {
           </section>
 
           <section className="py-8">
-            <p>
-              <h3 className="mb-4 text-2xl font-bold text-primary">Pay with</h3>
-            </p>
+            <h3 className="mb-4 text-2xl font-bold text-primary">Pay with</h3>
             <span>
               Pay in full or spread the cost with out buy now, pay later options
             </span>
