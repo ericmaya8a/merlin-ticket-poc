@@ -1,14 +1,12 @@
 "use client";
 
+import { AgeOptions } from "@/components/AgeSelector/AgeOptions";
+import { SimplePopover } from "@/components/SimplePopover/SimplePopover";
 import { TicketCalendar } from "@/components/TicketCalendar/TicketCalendar";
 import { Button } from "@/components/ui/button";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { format } from "date-fns";
 import Link from "next/link";
+import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 export function TicketWidget() {
@@ -16,6 +14,8 @@ export function TicketWidget() {
     "ticket-date",
     new Date(),
   );
+  const [totalAdults, setTotalAdults] = useState(0);
+  const [totalKids, setTotalKids] = useState(0);
 
   function handleSelectedDate(val?: Date) {
     if (val) {
@@ -27,14 +27,14 @@ export function TicketWidget() {
     <div className="mx-auto w-2/3 p-4">
       <div className="flex">
         <div className="grow-[5] cursor-pointer rounded-l-lg bg-white p-2 text-[#1E274A]">
-          <Popover>
-            <PopoverTrigger asChild>
+          <SimplePopover
+            trigger={
               <div>
                 <p className="text-xs">Date of visit</p>
                 <p className="font-bold">{format(ticketDate, "P")}</p>
               </div>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0">
+            }
+            content={
               <TicketCalendar
                 date={
                   ticketDate
@@ -43,20 +43,34 @@ export function TicketWidget() {
                 }
                 onSelect={handleSelectedDate}
               />
-            </PopoverContent>
-          </Popover>
+            }
+          />
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <p className="text-xs">Days</p>
           <p className="font-bold">1</p>
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
-          <p className="text-xs">Adults (17+)</p>
-          <p className="font-bold text-[#A1A3AA]">Select</p>
+          <SimplePopover
+            trigger={
+              <div>
+                <p className="text-xs">Adults (17+)</p>
+                <p className="font-bold text-[#A1A3AA]">
+                  {totalAdults || "Select"}
+                </p>
+              </div>
+            }
+            content={
+              <AgeOptions
+                setTotalAdults={setTotalAdults}
+                setTotalKids={setTotalKids}
+              />
+            }
+          />
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <p className="text-xs">Kids (2-16)</p>
-          <p className="font-bold text-[#A1A3AA]">Select</p>
+          <p className="font-bold text-[#A1A3AA]">{totalKids || "Select"}</p>
         </div>
         <div className="flex grow-[2] items-center justify-center rounded-r-lg bg-[#E52330] p-2">
           <Button className="hover:no-underline" variant="link">
