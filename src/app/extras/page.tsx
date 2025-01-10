@@ -44,6 +44,8 @@ export default function ParkingAndExtrasPage() {
                     <Button
                       size="lg"
                       variant="outline"
+                      className="bg-[#D7D8DB]"
+
                       // onClick={() =>
                       //   handleGuestChange("children", "decrement")
                       // }
@@ -88,6 +90,7 @@ export default function ParkingAndExtrasPage() {
                     <Button
                       size="lg"
                       variant="outline"
+                      className="bg-[#D7D8DB]"
                       // onClick={() =>
                       //   handleGuestChange("children", "decrement")
                       // }
@@ -123,7 +126,61 @@ export default function ParkingAndExtrasPage() {
                   Change
                 </Button>
               </div>
+              <div className="flex items-center justify-between px-2 py-2">
+                <span className="text-sm text-[#1E274A]">1 day ticket</span>{" "}
+              </div>
+              <div className="flex items-center justify-between px-2">
+                <div className="w-1/3 text-[#1E274A]">
+                  <div className="flex items-center space-x-2">
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      // onClick={() =>
+                      //   handleGuestChange("children", "decrement")
+                      // }
+                    >
+                      -
+                    </Button>
+                    <span className="w-2 pr-4 text-center text-2xl font-bold">
+                      5
+                    </span>
+                    <Button variant="destructive" size="sm">
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <span className="w-2/3 text-end text-[#1E274A]">
+                  <strong>£160.00</strong>
+                </span>
+              </div>
             </CardContent>
+
+            <div className="my-4 border-t border-gray-200"></div>
+
+            <CardFooter>
+              <div className="w-full space-y-2">
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-sm font-medium">Subtotal</span>
+                  <span className="text-sm font-semibold text-primary">
+                    £160.00
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-sm font-medium">VAT</span>
+                  <span className="text-sm font-semibold text-primary">
+                    £32.00
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-md font-bold text-primary">Total</span>
+                  <span className="text-md font-bold text-primary">
+                    £160.00
+                  </span>
+                </div>
+              </div>
+            </CardFooter>
           </Card>
         </section>
       </div>
