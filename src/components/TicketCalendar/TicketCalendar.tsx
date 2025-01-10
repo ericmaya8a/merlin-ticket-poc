@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 interface TicketCalendarProps {
   date?: Date;
   onSelect: (date?: Date) => void;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export function TicketCalendar({
@@ -18,7 +18,9 @@ export function TicketCalendar({
       selected={date}
       onSelect={(date) => {
         onSelect(date);
-        setIsOpen(false);
+        if (setIsOpen) {
+          setIsOpen(false);
+        }
       }}
     />
   );

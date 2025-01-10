@@ -8,13 +8,35 @@ import { useLocalStorage } from "usehooks-ts";
 import { CalendarSelect } from "./CalendarSelect";
 import { TicketSelect } from "./TicketSelect";
 
+export interface AgeOption {
+  id: "A" | "O" | "Y" | "T";
+  text: string;
+  count: number;
+}
+
+export interface Ticket {
+  totalAdults: number;
+  totalKids: number;
+  options: AgeOption[];
+}
+
 export function TicketWidget() {
   const [ticketDate, setTicketDate] = useLocalStorage<Date>(
     "ticket-date",
     new Date(),
   );
-  const [totalAdults, setTotalAdults] = useState(0);
-  const [totalKids, setTotalKids] = useState(0);
+  const [ticketData, setTicketData] = useLocalStorage<Ticket>("ticket-desc", {
+    totalAdults: 0,
+    totalKids: 0,
+    options: [
+      { id: "A", text: "Adult (Age 17+)", count: 0 },
+      { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
+      { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
+      { id: "T", text: "Toddlers (Under 2)", count: 0 },
+    ],
+  });
+  const [totalAdults, setTotalAdults] = useState(ticketData.totalAdults);
+  const [totalKids, setTotalKids] = useState(ticketData.totalKids);
 
   function handleSelectedDate(val?: Date) {
     if (val) {
@@ -38,6 +60,8 @@ export function TicketWidget() {
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <TicketSelect
+            ticketData={ticketData}
+            setTicketData={setTicketData}
             totalAdults={totalAdults}
             setTotalAdults={setTotalAdults}
             setTotalKids={setTotalKids}

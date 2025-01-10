@@ -1,22 +1,21 @@
 "use client";
 
 import { Counter } from "@/components/Counter/Counter";
+import { AgeOption, Ticket } from "@/components/TicketWidget/TicketWidget";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-interface AgeOption {
-  id: "A" | "O" | "Y" | "T";
-  text: string;
-  count: number;
-}
-
 interface ageOptionsProps {
+  ticketData: Ticket;
+  setTicketData: Dispatch<SetStateAction<Ticket>>;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export function AgeOptions({
+  ticketData,
+  setTicketData,
   setTotalAdults,
   setTotalKids,
   setIsOpen,
@@ -37,19 +36,35 @@ export function AgeOptions({
     });
   }
 
+  function getTotalAdults() {
+    return options.filter(({ id }) => id === "A")[0].count;
+  }
+
+  function getTotalKids() {
+    return options
+      .filter(({ id }) => id !== "A")
+      .reduce((sum, item) => sum + item.count, 0);
+  }
+
+  function handleApply() {
+    const tickets: Ticket = {
+      totalAdults: getTotalAdults(),
+      totalKids: getTotalKids(),
+      options,
+    };
+    setTicketData(tickets);
+    setIsOpen(false);
+  }
+
   useEffect(() => {
-    setTotalAdults(options.filter(({ id }) => id === "A")[0].count);
-    setTotalKids(
-      options
-        .filter(({ id }) => id !== "A")
-        .reduce((sum, item) => sum + item.count, 0),
-    );
+    setTotalAdults(getTotalAdults());
+    setTotalKids(getTotalKids());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   return (
     <div>
-      {options.map(({ id, text, count }) => (
+      {ticketData.options.map(({ id, text, count }) => (
         <div key={id} className="flex items-center justify-between px-1 py-2">
           <span className="text-sm">{text}</span>
           <Counter count={count} onChange={(val) => handleChange(id, val)} />
@@ -58,7 +73,7 @@ export function AgeOptions({
       <Button
         className="mt-4 w-full font-bold"
         variant="destructive"
-        onClick={() => setIsOpen(false)}
+        onClick={handleApply}
       >
         Apply
       </Button>

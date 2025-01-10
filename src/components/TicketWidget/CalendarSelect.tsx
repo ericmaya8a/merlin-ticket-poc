@@ -1,3 +1,5 @@
+"use client";
+
 import { TicketCalendar } from "@/components/TicketCalendar/TicketCalendar";
 import {
   Popover,
