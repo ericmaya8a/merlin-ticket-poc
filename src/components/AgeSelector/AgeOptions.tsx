@@ -1,6 +1,7 @@
 "use client";
 
 import { Counter } from "@/components/Counter/Counter";
+import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface AgeOption {
@@ -12,9 +13,14 @@ interface AgeOption {
 interface ageOptionsProps {
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export function AgeOptions({ setTotalAdults, setTotalKids }: ageOptionsProps) {
+export function AgeOptions({
+  setTotalAdults,
+  setTotalKids,
+  setIsOpen,
+}: ageOptionsProps) {
   const [options, setOptions] = useState<AgeOption[]>([
     { id: "A", text: "Adult (Age 17+)", count: 0 },
     { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
@@ -49,6 +55,13 @@ export function AgeOptions({ setTotalAdults, setTotalKids }: ageOptionsProps) {
           <Counter count={count} onChange={(val) => handleChange(id, val)} />
         </div>
       ))}
+      <Button
+        className="mt-4 w-full font-bold"
+        variant="destructive"
+        onClick={() => setIsOpen(false)}
+      >
+        Apply
+      </Button>
     </div>
   );
 }

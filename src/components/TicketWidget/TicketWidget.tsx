@@ -1,13 +1,12 @@
 "use client";
 
-import { AgeOptions } from "@/components/AgeSelector/AgeOptions";
-import { SimplePopover } from "@/components/SimplePopover/SimplePopover";
-import { TicketCalendar } from "@/components/TicketCalendar/TicketCalendar";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { CalendarSelect } from "./CalendarSelect";
+import { TicketSelect } from "./TicketSelect";
 
 export function TicketWidget() {
   const [ticketDate, setTicketDate] = useLocalStorage<Date>(
@@ -27,23 +26,10 @@ export function TicketWidget() {
     <div className="mx-auto w-2/3 p-4">
       <div className="flex">
         <div className="grow-[5] cursor-pointer rounded-l-lg bg-white p-2 text-[#1E274A]">
-          <SimplePopover
-            trigger={
-              <div>
-                <p className="text-xs">Date of visit</p>
-                <p className="font-bold">{format(ticketDate, "P")}</p>
-              </div>
-            }
-            content={
-              <TicketCalendar
-                date={
-                  ticketDate
-                    ? new Date(Date.parse(ticketDate.toString()))
-                    : undefined
-                }
-                onSelect={handleSelectedDate}
-              />
-            }
+          <CalendarSelect
+            ticketDate={format(ticketDate, "P")}
+            calendarDate={ticketDate}
+            onSelect={handleSelectedDate}
           />
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
@@ -51,21 +37,10 @@ export function TicketWidget() {
           <p className="font-bold">1</p>
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
-          <SimplePopover
-            trigger={
-              <div>
-                <p className="text-xs">Adults (17+)</p>
-                <p className="font-bold text-[#A1A3AA]">
-                  {totalAdults || "Select"}
-                </p>
-              </div>
-            }
-            content={
-              <AgeOptions
-                setTotalAdults={setTotalAdults}
-                setTotalKids={setTotalKids}
-              />
-            }
+          <TicketSelect
+            totalAdults={totalAdults}
+            setTotalAdults={setTotalAdults}
+            setTotalKids={setTotalKids}
           />
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
