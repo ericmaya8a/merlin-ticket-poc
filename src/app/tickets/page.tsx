@@ -1,32 +1,41 @@
 import { BackButton } from "@/components/BackButton/BackButton";
+import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
+import { PaymentTypes } from "./PaymentTypes";
+import { TicketCard } from "./TicketCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
+import Link from "next/link";
 
 export default function TicketsPage() {
   return (
     <>
       <Header />
       <div className="flex min-h-[calc(100dvh-80px)]">
-        <section className="w-2/3 p-8">
+        <section className="w-2/3 px-16 py-8">
           <BackButton href="/" />
+          <h1 className="mb-4 mt-4 scroll-m-20 text-3xl tracking-tight lg:text-5xl">
+            Choose your tickets
+          </h1>
+          <p className="text-[#1E274A]">Pay in full or spread the cost.</p>
+          <div className="space-y-8">
+            <PaymentTypes />
+            <TicketCard />
+            <div className="text-center">
+              <Button
+                className="w-1/4 font-bold hover:no-underline"
+                variant="destructive"
+                asChild
+              >
+                <Link className="text-white" href="/extras">
+                  Continue
+                </Link>
+              </Button>
+            </div>
+          </div>
         </section>
+
         <section className="w-1/3 bg-[#FBFBFB] p-8">
-          <Card className="w-[306px]">
-            <CardHeader>
-              <CardTitle>Your visit</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between bg-[#F2F2F3] px-2">
-                <Calendar className="text-[#A1A3AA]" />{" "}
-                <span className="text-sm text-[#1E274A]">Sat 14 Dec 2024</span>{" "}
-                <Button className="text-[#E52330]" variant="link">
-                  Change
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <Cart />
         </section>
       </div>
     </>
