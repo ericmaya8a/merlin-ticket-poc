@@ -5,9 +5,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
 import { useLocalStorage } from "usehooks-ts";
+import { CalendarModal } from "../CalendarModal/CalendarModal";
 
 export function Cart() {
-  const [ticketDate] = useLocalStorage<Date>("ticket-date", new Date());
+  const [ticketDate, setTicketDate] = useLocalStorage<Date>(
+    "ticket-date",
+    new Date(),
+  );
+
+  function handleSelectedDate(val?: Date) {
+    if (val) {
+      setTicketDate(val);
+    }
+  }
 
   return (
     <Card className="w-[306px]">
@@ -19,10 +29,19 @@ export function Cart() {
           <Calendar className="text-[#A1A3AA]" />{" "}
           <span className="text-sm text-[#1E274A]">
             {format(ticketDate, "E dd LLL yyyy")}
-          </span>{" "}
-          <Button className="text-[#E52330] hover:no-underline" variant="link">
-            Change
-          </Button>
+          </span>
+          <CalendarModal
+            calendarDate={ticketDate}
+            onSelect={handleSelectedDate}
+            trigger={
+              <Button
+                className="text-[#E52330] hover:no-underline"
+                variant="link"
+              >
+                Change
+              </Button>
+            }
+          />
         </div>
       </CardContent>
     </Card>
