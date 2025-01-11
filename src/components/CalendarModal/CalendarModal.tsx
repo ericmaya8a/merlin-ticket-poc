@@ -4,6 +4,7 @@ import { TicketCalendar } from "@/components/TicketCalendar/TicketCalendar";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -27,6 +28,9 @@ export function CalendarModal({
       <DialogTrigger>{trigger}</DialogTrigger>
       <DialogContent className="w-auto">
         <DialogTitle>Date of visit?</DialogTitle>
+        <DialogDescription className="sr-only">
+          Date of visit?
+        </DialogDescription>
         <TicketCalendar
           date={
             calendarDate

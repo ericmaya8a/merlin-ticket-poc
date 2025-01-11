@@ -1,13 +1,12 @@
 "use client";
 
 import { Counter } from "@/components/Counter/Counter";
-import { AgeOption, Ticket } from "@/components/TicketWidget/TicketWidget";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface ageOptionsProps {
-  ticketData: Ticket;
-  setTicketData: Dispatch<SetStateAction<Ticket>>;
+  ticketData: TicketType;
+  setTicketData: Dispatch<SetStateAction<TicketType>>;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -20,14 +19,14 @@ export function AgeOptions({
   setTotalKids,
   setIsOpen,
 }: ageOptionsProps) {
-  const [options, setOptions] = useState<AgeOption[]>([
+  const [options, setOptions] = useState<AgeOptionType[]>([
     { id: "A", text: "Adult (Age 17+)", count: 0 },
     { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
     { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
     { id: "T", text: "Toddlers (Under 2)", count: 0 },
   ]);
 
-  function handleChange(id: AgeOption["id"], val: number) {
+  function handleChange(id: AgeOptionType["id"], val: number) {
     setOptions((prevState) => {
       const newState = [...prevState];
       const index = newState.findIndex((item) => item.id === id);
@@ -47,7 +46,7 @@ export function AgeOptions({
   }
 
   function handleApply() {
-    const tickets: Ticket = {
+    const tickets: TicketType = {
       totalAdults: getTotalAdults(),
       totalKids: getTotalKids(),
       options,

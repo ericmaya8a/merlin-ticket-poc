@@ -1,17 +1,16 @@
 "use client";
 
+import { AgeOptions } from "@/components/AgeSelector/AgeOptions";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { AgeOptions } from "@/components/AgeSelector/AgeOptions";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Ticket } from "./TicketWidget";
 
 interface TicketSelectProps {
-  ticketData: Ticket;
-  setTicketData: Dispatch<SetStateAction<Ticket>>;
+  ticketData: TicketType;
+  setTicketData: Dispatch<SetStateAction<TicketType>>;
   totalAdults: number;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
