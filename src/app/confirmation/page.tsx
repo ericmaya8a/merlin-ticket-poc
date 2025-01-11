@@ -1,13 +1,13 @@
+"use client";
+
 import { Header } from "@/components/Header/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Metadata } from "next";
+import { format } from "date-fns";
 import Image from "next/image";
-
-export const metadata: Metadata = {
-  title: "Confirmation",
-};
+import { useLocalStorage } from "usehooks-ts";
 
 export default function ConfirmationPage() {
+  const [reservationDate] = useLocalStorage<Date>("ticket-date", new Date());
   return (
     <>
       <Header />
@@ -17,7 +17,9 @@ export default function ConfirmationPage() {
             You're going to Chessington!
           </h1>
 
-          <span className="text-3xl font-bold">Saturday 14 Dec 2024</span>
+          <span className="text-3xl font-bold">
+            {format(reservationDate, "EEEE dd MMM yyyy")}
+          </span>
           <Image
             src="/images/get_ready_for_your_visit.png"
             width={1600}
@@ -87,7 +89,7 @@ export default function ConfirmationPage() {
 
             <div className="flex flex-col items-start py-8">
               <span className="pb-4 text-2xl font-bold text-primary">
-                Saturday 14 Dec 2024
+                {format(reservationDate, "EEEE dd MMM yyyy")}
               </span>
 
               <span>Park opens at 10:00am</span>
