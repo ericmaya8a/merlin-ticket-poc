@@ -1,12 +1,5 @@
 import { Header } from "@/components/Header/Header";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -42,8 +35,8 @@ export default function ConfirmationPage() {
             </CardTitle>
           </CardHeader>
 
-          <CardContent>
-            <div className="mx-auto w-[400px] space-y-2">
+          <CardContent className="mx-auto w-[400px]">
+            <div className="space-y-2">
               <div className="flex items-center justify-between py-2">
                 <span className="text-lg font-medium">1 day ticket</span>
                 <span className="text-lg font-medium text-primary">
@@ -92,16 +85,30 @@ export default function ConfirmationPage() {
 
             <div className="w-full border-t border-gray-200"></div>
 
-            <div className="flex items-center justify-center py-8">
-              <span className="text-2xl font-bold text-primary">
+            <div className="flex flex-col items-start py-8">
+              <span className="pb-4 text-2xl font-bold text-primary">
                 Saturday 14 Dec 2024
               </span>
+
+              <span>Park opens at 10:00am</span>
+              <span>Alton Towers</span>
+              <span>Farley Ln, Alton, </span>
+              <span>Stoke-on-Trent </span>
+              <span>ST10 4DB</span>
+            </div>
+
+            <div className="w-full border-t border-gray-200"></div>
+
+            <div className="flex flex-col items-start py-8">
+              <span className="pb-4 text-2xl font-bold text-primary">
+                Payment
+              </span>
+
+              <span>Mary Goround</span>
+              <span>mgoround@gmail.com</span>
+              <span>Apple Pay</span>
             </div>
           </CardContent>
-
-          <div className="my-4 border-t border-gray-200"></div>
-
-          <CardFooter>Footer</CardFooter>
         </Card>
       </section>
     </>
