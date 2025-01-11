@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import Link from "next/link";
 
 export default function ReviewPage() {
   return (
@@ -181,6 +182,14 @@ export default function ReviewPage() {
 
           <section className="text-4xl font-bold">TBC...</section>
         </section>
+
+        <Button
+          asChild
+          variant="destructive"
+          className="mx-auto h-12 w-[280px]"
+        >
+          <Link href="/confirmation">Continue</Link>
+        </Button>
       </div>
     </>
   );
