@@ -1,27 +1,28 @@
 "use client";
 
-import { Counter } from "@/components/Counter/Counter";
+import { initialStates } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
-import { Tag } from "lucide-react";
+import { Tag, Trash2 } from "lucide-react";
 import { useLocalStorage } from "usehooks-ts";
+import { TicketQuantityCounter } from "./TicketQuantityCounter";
 
 export function TicketQuantity() {
-  const [basket] = useLocalStorage<BasketType>("basket", {
-    tickets: {
-      count: 0,
-      subtotal: 0,
-      savings: 0,
-    },
-  });
+  const [basket, , removeBasket] = useLocalStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
 
   if (basket.tickets.count > 0)
     return (
       <>
         <div className="flex items-center justify-between">
-          <Counter
-            count={basket.tickets.count}
-            onChange={(value) => console.log(value)}
-          />
+          <TicketQuantityCounter />
+          <div className="cursor-pointer">
+            <Trash2
+              className="h-4 w-4 text-red-600"
+              onClick={() => removeBasket()}
+            />
+          </div>
           <div>
             <span className="line-through">
               {formatCurrency(basket.tickets.subtotal + basket.tickets.savings)}

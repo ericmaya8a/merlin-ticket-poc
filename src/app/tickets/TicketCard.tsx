@@ -1,31 +1,22 @@
 "use client";
 
+import { TicketQuantityCounter } from "@/components/Cart/TicketQuantityCounter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { constants, initialStates } from "@/lib/constants";
 import { cn, formatCurrency } from "@/lib/utils";
 import { useLocalStorage } from "usehooks-ts";
 import { InfoModal } from "./InfoModal";
-import { constants } from "@/lib/constants";
-import { Counter } from "@/components/Counter/Counter";
 
 export function TicketCard() {
-  const [basket, setBasket] = useLocalStorage<BasketType>("basket", {
-    tickets: {
-      count: 0,
-      subtotal: 0,
-      savings: 0,
-    },
-  });
-  const [ticketData] = useLocalStorage<TicketType>("ticket-desc", {
-    totalAdults: 0,
-    totalKids: 0,
-    options: [
-      { id: "A", text: "Adult (Age 17+)", count: 0 },
-      { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
-      { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
-      { id: "T", text: "Toddlers (Under 2)", count: 0 },
-    ],
-  });
+  const [basket, setBasket] = useLocalStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
+  const [ticketData] = useLocalStorage<TicketType>(
+    "ticket-desc",
+    initialStates.ticketDescription as TicketType,
+  );
   const [dayPrice, setDayPrice] = useLocalStorage<1 | 2>("ticket-pass", 1);
   const isOneDayTicket = dayPrice === 1;
   const header = isOneDayTicket ? "1 day ticket" : "2 day ticket";
@@ -107,10 +98,7 @@ export function TicketCard() {
 
           <div className="flex grow flex-col items-center justify-center gap-4 p-8">
             {basket.tickets.count > 0 ? (
-              <Counter
-                count={totalSelectedTickets}
-                onChange={(value) => console.log(value)}
-              />
+              <TicketQuantityCounter />
             ) : (
               <Button
                 className="w-full font-bold"

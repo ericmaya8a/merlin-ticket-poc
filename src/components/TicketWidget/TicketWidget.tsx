@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { CalendarSelect } from "./CalendarSelect";
 import { TicketSelect } from "./TicketSelect";
+import { initialStates } from "@/lib/constants";
 
 export function TicketWidget() {
   const [ticketDate, setTicketDate] = useLocalStorage<Date>(
@@ -15,16 +16,7 @@ export function TicketWidget() {
   );
   const [ticketData, setTicketData] = useLocalStorage<TicketType>(
     "ticket-desc",
-    {
-      totalAdults: 0,
-      totalKids: 0,
-      options: [
-        { id: "A", text: "Adult (Age 17+)", count: 0 },
-        { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
-        { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
-        { id: "T", text: "Toddlers (Under 2)", count: 0 },
-      ],
-    },
+    initialStates.ticketDescription as TicketType,
   );
   const [totalAdults, setTotalAdults] = useState(ticketData.totalAdults);
   const [totalKids, setTotalKids] = useState(ticketData.totalKids);

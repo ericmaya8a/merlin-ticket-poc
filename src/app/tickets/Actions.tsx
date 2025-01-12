@@ -2,6 +2,7 @@
 
 import { CalendarModal } from "@/components/CalendarModal/CalendarModal";
 import { TicketModal } from "@/components/TicketsModal/TicketModal";
+import { initialStates } from "@/lib/constants";
 import { format } from "date-fns";
 import { Calendar, Edit2, User } from "lucide-react";
 import { useState } from "react";
@@ -14,16 +15,7 @@ export function Actions() {
   );
   const [ticketData, setTicketData] = useLocalStorage<TicketType>(
     "ticket-desc",
-    {
-      totalAdults: 0,
-      totalKids: 0,
-      options: [
-        { id: "A", text: "Adult (Age 17+)", count: 0 },
-        { id: "O", text: "Older kids (Age 8 - 15)", count: 0 },
-        { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
-        { id: "T", text: "Toddlers (Under 2)", count: 0 },
-      ],
-    },
+    initialStates.ticketDescription as TicketType,
   );
   const [, setTotalAdults] = useState(ticketData.totalAdults);
   const [, setTotalKids] = useState(ticketData.totalKids);

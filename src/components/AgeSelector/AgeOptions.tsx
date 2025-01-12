@@ -2,7 +2,9 @@
 
 import { Counter } from "@/components/Counter/Counter";
 import { Button } from "@/components/ui/button";
+import { constants, initialStates } from "@/lib/constants";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 
 interface ageOptionsProps {
   ticketData: TicketType;
@@ -25,6 +27,10 @@ export function AgeOptions({
     { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
     { id: "T", text: "Toddlers (Under 2)", count: 0 },
   ]);
+  const [basket, setBasket] = useLocalStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
 
   function handleChange(id: AgeOptionType["id"], val: number) {
     setOptions((prevState) => {
@@ -53,6 +59,22 @@ export function AgeOptions({
     };
     setTicketData(tickets);
     setIsOpen(false);
+    if (basket.tickets.count > 0) {
+      setBasket((prevBasket) => {
+        const newBasket = { ...prevBasket };
+        const count = tickets.totalAdults + tickets.totalKids;
+        const gateSubtotal = count * constants.tickets.GATE_PRICE;
+        const subtotal = count * constants.tickets.ONLINE_PRICE;
+        const savings = gateSubtotal - subtotal;
+
+        newBasket.tickets = {
+          count,
+          subtotal,
+          savings,
+        };
+        return newBasket;
+      });
+    }
   }
 
   useEffect(() => {
