@@ -27,6 +27,36 @@ export function TicketCard() {
     totalSelectedTickets * constants.tickets.ONLINE_PRICE * dayPrice;
   const savings = gateSubtotal - onlineSubtotal;
 
+  function handleOneDay() {
+    setDayPrice(1);
+    if (basket.tickets.count > 0 && dayPrice === 2) {
+      setBasket((prevBasket) => {
+        const newBasket = { ...prevBasket };
+        newBasket.tickets = {
+          count: prevBasket.tickets.count,
+          savings: prevBasket.tickets.savings / 2,
+          subtotal: prevBasket.tickets.subtotal / 2,
+        };
+        return newBasket;
+      });
+    }
+  }
+
+  function handleTwoDay() {
+    setDayPrice(2);
+    if (basket.tickets.count > 0) {
+      setBasket((prevBasket) => {
+        const newBasket = { ...prevBasket };
+        newBasket.tickets = {
+          count: prevBasket.tickets.count,
+          savings: prevBasket.tickets.savings * 2,
+          subtotal: prevBasket.tickets.subtotal * 2,
+        };
+        return newBasket;
+      });
+    }
+  }
+
   function handleAddToBasket() {
     setBasket((prevValues) => {
       const newValues = { ...prevValues };
@@ -51,7 +81,7 @@ export function TicketCard() {
                 ? "bg-red-600 text-white"
                 : "bg-white text-red-600",
             )}
-            onClick={() => setDayPrice(1)}
+            onClick={handleOneDay}
           >
             1 day
           </span>
@@ -62,7 +92,7 @@ export function TicketCard() {
                 ? "bg-red-600 text-white"
                 : "bg-white text-red-600",
             )}
-            onClick={() => setDayPrice(2)}
+            onClick={handleTwoDay}
           >
             2 day
           </span>

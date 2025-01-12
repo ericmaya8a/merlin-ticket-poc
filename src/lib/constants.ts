@@ -3,6 +3,10 @@ export const constants = {
     GATE_PRICE: 40,
     ONLINE_PRICE: 29,
   },
+  parking: {
+    EXPRESS_PARKING: 15,
+    STANDARD_PARKING: 7,
+  },
 } as const;
 
 export const initialStates = {

@@ -1,7 +1,14 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { DateInfo } from "./DateInfo";
 import TicketPass from "./TicketPass";
 import { TicketQuantity } from "./TicketQuantity";
+import VisitTotal from "./VisitTotal";
 
 export function Cart() {
   return (
@@ -16,6 +23,9 @@ export function Cart() {
           <TicketQuantity />
         </div>
       </CardContent>
+      <CardFooter className="px-0">
+        <VisitTotal />
+      </CardFooter>
     </Card>
   );
 }

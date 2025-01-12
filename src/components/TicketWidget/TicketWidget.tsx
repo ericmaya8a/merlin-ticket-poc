@@ -55,7 +55,11 @@ export function TicketWidget() {
           <p className="font-bold text-[#A1A3AA]">{totalKids || "Select"}</p>
         </div>
         <div className="flex grow-[2] items-center justify-center rounded-r-lg bg-[#E52330] p-2">
-          <Button className="hover:no-underline" variant="link">
+          <Button
+            className="hover:no-underline"
+            variant="link"
+            disabled={totalAdults < 1}
+          >
             <Link className="font-bold text-white" href="/tickets">
               Get tickets
             </Link>
