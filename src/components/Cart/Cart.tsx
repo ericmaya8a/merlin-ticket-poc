@@ -10,12 +10,18 @@ import TicketPass from "./TicketPass";
 import { TicketQuantity } from "./TicketQuantity";
 import VisitTotal from "./VisitTotal";
 import { ParkingQuantity } from "./ParkingQuantity";
+import { cn } from "@/lib/utils";
 
-export function Cart() {
+interface CartProps {
+  cardClassname?: string;
+  titleClassName?: string;
+}
+
+export function Cart({ cardClassname, titleClassName }: CartProps) {
   return (
-    <Card className="w-[306px]">
+    <Card className={cn("w-[306px]", cardClassname)}>
       <CardHeader>
-        <CardTitle>Your visit</CardTitle>
+        <CardTitle className={titleClassName}>Your visit</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

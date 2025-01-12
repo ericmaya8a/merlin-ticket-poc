@@ -76,7 +76,11 @@ export function Parking() {
         </Card>
       ))}
 
-      <Button variant="destructive" className="h-12 w-[280px]" asChild>
+      <Button
+        variant="destructive"
+        className="h-12 w-[280px] font-bold"
+        asChild
+      >
         <Link href="/review">Continue</Link>
       </Button>
     </section>

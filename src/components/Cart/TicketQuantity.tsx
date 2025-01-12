@@ -24,12 +24,14 @@ export function TicketQuantity() {
     return (
       <>
         <div className="flex items-center justify-between">
-          <TicketQuantityCounter />
-          <div className="cursor-pointer">
-            <Trash2
-              className="h-4 w-4 text-red-600"
-              onClick={handleDeleteTickets}
-            />
+          <div className="flex items-center gap-2">
+            <TicketQuantityCounter />
+            <div className="cursor-pointer">
+              <Trash2
+                className="h-4 w-4 text-red-600"
+                onClick={handleDeleteTickets}
+              />
+            </div>
           </div>
           <div>
             <span className="line-through">

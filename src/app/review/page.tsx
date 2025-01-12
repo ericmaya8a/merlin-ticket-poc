@@ -1,13 +1,7 @@
 import { BackButton } from "@/components/BackButton/BackButton";
+import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function ReviewPage() {
@@ -23,121 +17,11 @@ export default function ReviewPage() {
           Review & complete your order
         </h1>
 
-        <section className="">
-          <Card className="px-20">
-            <CardHeader>
-              <CardTitle>
-                <span className="text-3xl font-bold text-primary">
-                  Your visit
-                </span>
-              </CardTitle>
-            </CardHeader>
-
-            <CardContent>
-              <div className="flex items-center justify-between bg-[#F2F2F3] px-2">
-                <span className="text-sm text-[#1E274A]">Sat 14 Dec 2024</span>{" "}
-                <Button className="text-[#E52330]" variant="link">
-                  Change
-                </Button>
-              </div>
-              <div className="flex items-center justify-between px-2 py-2">
-                <span className="text-sm text-[#1E274A]">1 day ticket</span>{" "}
-              </div>
-              <div className="flex items-center justify-between px-2">
-                <div className="w-1/3 text-[#1E274A]">
-                  <div className="flex items-center space-x-2">
-                    <Button variant="destructive" size="sm">
-                      -
-                    </Button>
-                    <span className="w-2 pr-4 text-center text-2xl font-bold">
-                      5
-                    </span>
-                    <Button variant="destructive" size="sm">
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <span className="w-2/3 text-end text-[#1E274A]">
-                  <strong>£160.00</strong>
-                </span>
-              </div>
-
-              <div className="my-4 border-t border-gray-200"></div>
-
-              <div className="flex items-center justify-between px-2 py-2">
-                <span className="text-sm text-[#1E274A]">Reserve & Ride</span>{" "}
-              </div>
-              <div className="flex items-center justify-between px-2">
-                <div className="w-1/3 text-[#1E274A]">
-                  <div className="flex items-center space-x-2">
-                    <Button variant="destructive" size="sm">
-                      -
-                    </Button>
-                    <span className="w-2 pr-4 text-center text-2xl font-bold">
-                      5
-                    </span>
-                    <Button variant="destructive" size="sm">
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <span className="w-2/3 text-end text-[#1E274A]">
-                  <strong>£275.00</strong>
-                </span>
-              </div>
-
-              <div className="my-4 border-t border-gray-200"></div>
-
-              <div className="flex items-center justify-between px-2 py-2">
-                <span className="text-sm text-[#1E274A]">Express parking</span>{" "}
-              </div>
-              <div className="flex items-center justify-between px-2">
-                <div className="w-1/3 text-[#1E274A]">
-                  <div className="flex items-center space-x-2">
-                    <Button variant="destructive" size="sm">
-                      -
-                    </Button>
-                    <span className="w-2 pr-4 text-center text-2xl font-bold">
-                      1
-                    </span>
-                    <Button variant="destructive" size="sm">
-                      +
-                    </Button>
-                  </div>
-                </div>
-                <span className="w-2/3 text-end text-[#1E274A]">
-                  <strong>£275.00</strong>
-                </span>
-              </div>
-            </CardContent>
-
-            <div className="my-4 border-t border-gray-200"></div>
-
-            <CardFooter>
-              <div className="w-full space-y-2 px-2">
-                <div className="flex items-center justify-between py-2">
-                  <span className="text-md font-medium">Subtotal</span>
-                  <span className="text-md font-semibold text-primary">
-                    £450.00
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between py-2">
-                  <span className="text-md font-medium">VAT</span>
-                  <span className="text-md font-semibold text-primary">
-                    £91.00
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between py-2">
-                  <span className="text-2xl font-bold text-primary">Total</span>
-                  <span className="text-2xl font-bold text-primary">
-                    £450.00
-                  </span>
-                </div>
-              </div>
-            </CardFooter>
-          </Card>
+        <section>
+          <Cart
+            titleClassName="text-3xl font-bold text-primary"
+            cardClassname="w-full p-20"
+          />
         </section>
 
         <section className="py-8">
@@ -179,7 +63,11 @@ export default function ReviewPage() {
             </span>
           </section>
 
-          <section className="text-4xl font-bold">TBC...</section>
+          <section>
+            <Button className="w-full bg-blue-950 text-2xl font-bold text-white">
+              PayPay
+            </Button>
+          </section>
         </section>
       </div>
     </>
