@@ -6,4 +6,22 @@ export const db = factory({
     firstName: String,
     lastName: String,
   },
+  booking: {
+    id: primaryKey(String),
+    tickets: {
+      count: Number,
+      subtotal: Number,
+      savings: Number,
+    },
+    parking: {
+      express: {
+        count: Number,
+        subtotal: Number,
+      },
+      standard: {
+        count: Number,
+        subtotal: Number,
+      },
+    },
+  },
 });

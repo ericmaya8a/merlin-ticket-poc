@@ -1,8 +1,8 @@
 import { BackButton } from "@/components/BackButton/BackButton";
 import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { PaymentButton } from "./PaymentButton";
 
 export default function ReviewPage() {
   return (
@@ -50,8 +50,8 @@ export default function ReviewPage() {
                 htmlFor="terms"
                 className="text-md font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                I would like to get personalised offers and updates from Merlin
-                Entertainments{" "}
+                I would like to get personalized offers and updates from Merlin
+                Entertainments
               </label>
             </div>
           </section>
@@ -64,9 +64,7 @@ export default function ReviewPage() {
           </section>
 
           <section>
-            <Button className="w-full bg-blue-950 text-2xl font-bold text-white">
-              PayPay
-            </Button>
+            <PaymentButton />
           </section>
         </section>
       </div>
