@@ -1,11 +1,10 @@
 import { BackButton } from "@/components/BackButton/BackButton";
 import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Actions } from "./Actions";
 import { PaymentTypes } from "./PaymentTypes";
 import { TicketCard } from "./TicketCard";
+import { ContinueButton } from "./ContinueButton";
 
 export default function TicketsPage() {
   return (
@@ -28,15 +27,7 @@ export default function TicketsPage() {
             <PaymentTypes />
             <TicketCard />
             <div className="text-center">
-              <Button
-                className="w-1/4 font-bold hover:no-underline"
-                variant="destructive"
-                asChild
-              >
-                <Link className="text-white" href="/extras">
-                  Continue
-                </Link>
-              </Button>
+              <ContinueButton />
             </div>
           </div>
         </section>
