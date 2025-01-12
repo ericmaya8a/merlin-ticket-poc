@@ -7,6 +7,7 @@ export const constants = {
     EXPRESS_PARKING: 15,
     STANDARD_PARKING: 7,
   },
+  VAT: 0.2,
 } as const;
 
 export const initialStates = {
@@ -25,6 +26,16 @@ export const initialStates = {
       count: 0,
       subtotal: 0,
       savings: 0,
+    },
+    parking: {
+      express: {
+        count: 0,
+        subtotal: 0,
+      },
+      standard: {
+        count: 0,
+        subtotal: 0,
+      },
     },
   },
 };

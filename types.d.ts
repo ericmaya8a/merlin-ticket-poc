@@ -4,6 +4,16 @@ interface BasketType {
     subtotal: number;
     savings: number;
   };
+  parking: {
+    express: {
+      count: number;
+      subtotal: number;
+    };
+    standard: {
+      count: number;
+      subtotal: number;
+    };
+  };
 }
 
 interface AgeOptionType {

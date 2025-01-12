@@ -9,6 +9,7 @@ import { DateInfo } from "./DateInfo";
 import TicketPass from "./TicketPass";
 import { TicketQuantity } from "./TicketQuantity";
 import VisitTotal from "./VisitTotal";
+import { ParkingQuantity } from "./ParkingQuantity";
 
 export function Cart() {
   return (
@@ -21,6 +22,7 @@ export function Cart() {
           <DateInfo />
           <TicketPass />
           <TicketQuantity />
+          <ParkingQuantity />
         </div>
       </CardContent>
       <CardFooter className="px-0">

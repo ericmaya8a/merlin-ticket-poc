@@ -7,10 +7,18 @@ import { useLocalStorage } from "usehooks-ts";
 import { TicketQuantityCounter } from "./TicketQuantityCounter";
 
 export function TicketQuantity() {
-  const [basket, , removeBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useLocalStorage<BasketType>(
     "basket",
     initialStates.basket,
   );
+
+  function handleDeleteTickets() {
+    setBasket((prevBasket) => {
+      const newBasket = { ...prevBasket };
+      newBasket.tickets = initialStates.basket.tickets;
+      return newBasket;
+    });
+  }
 
   if (basket.tickets.count > 0)
     return (
@@ -20,7 +28,7 @@ export function TicketQuantity() {
           <div className="cursor-pointer">
             <Trash2
               className="h-4 w-4 text-red-600"
-              onClick={() => removeBasket()}
+              onClick={handleDeleteTickets}
             />
           </div>
           <div>
