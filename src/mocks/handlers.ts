@@ -2,6 +2,7 @@ import { constants } from "@/lib/constants";
 import { faker } from "@faker-js/faker";
 import { http, HttpResponse } from "msw";
 import { db } from "./db";
+import { format } from "date-fns";
 
 function getRandomParking(isExpress?: boolean) {
   const count = faker.number.int({ min: 0, max: 3 });
@@ -24,6 +25,14 @@ function getRandomTickets() {
   };
 }
 
+function randomDate() {
+  const date = faker.date.between({
+    from: new Date(),
+    to: new Date(2025, 9, 20),
+  });
+  return format(date, "EEEE dd LLL yyyy");
+}
+
 export const handlers = [
   http.get("http://localhost:3000/api/booking/:id", (req) => {
     const id = req.params.id as string;
@@ -37,6 +46,7 @@ export const handlers = [
       getRandomTickets();
     const newBooking = db.booking.create({
       id: faker.string.uuid(),
+      date: randomDate(),
       tickets: {
         count: ticketsCount,
         savings: ticketsSavings,

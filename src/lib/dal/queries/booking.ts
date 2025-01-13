@@ -2,7 +2,7 @@
 
 interface BookingByIdResponse {
   success: boolean;
-  data: BasketType & { id: string };
+  data: BasketType & { id: string; date: string };
 }
 
 export async function getBookingById(id: string): Promise<BookingByIdResponse> {

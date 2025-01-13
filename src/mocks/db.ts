@@ -8,6 +8,7 @@ export const db = factory({
   },
   booking: {
     id: primaryKey(String),
+    date: String,
     tickets: {
       count: Number,
       subtotal: Number,
