@@ -59,7 +59,7 @@ export function TicketWidget() {
           <Button
             className="hover:no-underline"
             variant="link"
-            disabled={totalAdults < 1}
+            disabled={ticketData.totalAdults < 1}
           >
             <Link className="font-bold text-white" href="/tickets">
               Get tickets

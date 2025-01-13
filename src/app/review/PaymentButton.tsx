@@ -26,11 +26,11 @@ export function PaymentButton() {
     const { success, data } = await payVisit(basket);
 
     if (success) {
+      router.push(`/confirmation?id=${data.id}`);
       removeTicketBasket();
       removeTicketDescription();
       removeTicketDate();
       removeTicketPass();
-      router.push(`/confirmation?id=${data.id}`);
     }
   }
 

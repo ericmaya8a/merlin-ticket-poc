@@ -41,7 +41,7 @@ export function ParkingQuantityExpressCounter() {
     <div className="flex items-center justify-between gap-2">
       <Button
         variant="destructive"
-        disabled={basket.parking.express.count <= 1}
+        disabled={basket.parking.express.count <= 0}
         size="icon"
         onClick={handleMinus}
       >

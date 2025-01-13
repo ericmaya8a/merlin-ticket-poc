@@ -41,7 +41,7 @@ export function ParkingQuantityStandardCounter() {
     <div className="flex items-center justify-between gap-2">
       <Button
         variant="destructive"
-        disabled={basket.parking.standard.count <= 1}
+        disabled={basket.parking.standard.count <= 0}
         size="icon"
         onClick={handleMinus}
       >
