@@ -1,8 +1,8 @@
 import { constants } from "@/lib/constants";
 import { faker } from "@faker-js/faker";
+import { format } from "date-fns";
 import { http, HttpResponse } from "msw";
 import { db } from "./db";
-import { format } from "date-fns";
 
 function getRandomParking(isExpress?: boolean) {
   const count = faker.number.int({ min: 1, max: 3 });
@@ -43,6 +43,8 @@ export const handlers = [
     return HttpResponse.json({ success: true, data: booking });
   }),
   http.post("http://localhost:3000/api/booking", () => {
+    const { count: expressCount, subtotal: expressSubtotal } =
+      getRandomParking(true);
     const { count, subtotal } = getRandomParking();
     const { ticketsCount, ticketsSavings, ticketsSubtotal } =
       getRandomTickets();
@@ -56,8 +58,8 @@ export const handlers = [
       },
       parking: {
         express: {
-          count,
-          subtotal,
+          count: expressCount,
+          subtotal: expressSubtotal,
         },
         standard: {
           count,
