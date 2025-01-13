@@ -30,7 +30,7 @@ export function TicketWidget() {
 
   return (
     <div className="mx-auto w-2/3 p-4">
-      <div className="flex">
+      <div className="flex flex-wrap">
         <div className="grow-[5] cursor-pointer rounded-l-lg bg-white p-2 text-[#1E274A]">
           <CalendarSelect
             ticketDate={format(ticketDate, "P")}

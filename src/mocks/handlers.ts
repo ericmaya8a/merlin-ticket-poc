@@ -1,6 +1,5 @@
 import { constants } from "@/lib/constants";
 import { faker } from "@faker-js/faker";
-import { format } from "date-fns";
 import { http, HttpResponse } from "msw";
 import { db } from "./db";
 
@@ -32,41 +31,43 @@ function randomDate() {
     from: startDate,
     to: new Date(2025, 9, 20),
   });
-  return format(date, "EEEE dd LLL yyyy");
+  return date.toDateString();
+}
+
+function createBookingData() {
+  const { count: expressCount, subtotal: expressSubtotal } =
+    getRandomParking(true);
+  const { count, subtotal } = getRandomParking();
+  const { ticketsCount, ticketsSavings, ticketsSubtotal } = getRandomTickets();
+  return db.booking.create({
+    id: faker.string.uuid(),
+    date: randomDate(),
+    tickets: {
+      count: ticketsCount,
+      savings: ticketsSavings,
+      subtotal: ticketsSubtotal,
+    },
+    parking: {
+      express: {
+        count: expressCount,
+        subtotal: expressSubtotal,
+      },
+      standard: {
+        count,
+        subtotal,
+      },
+    },
+  });
 }
 
 export const handlers = [
-  http.get("http://localhost:3000/api/booking/:id", (req) => {
-    const id = req.params.id as string;
-    const booking = db.booking.findFirst({ where: { id: { equals: id } } });
+  http.get("http://localhost:3000/api/booking/:id", () => {
+    const booking = createBookingData();
 
     return HttpResponse.json({ success: true, data: booking });
   }),
   http.post("http://localhost:3000/api/booking", () => {
-    const { count: expressCount, subtotal: expressSubtotal } =
-      getRandomParking(true);
-    const { count, subtotal } = getRandomParking();
-    const { ticketsCount, ticketsSavings, ticketsSubtotal } =
-      getRandomTickets();
-    const newBooking = db.booking.create({
-      id: faker.string.uuid(),
-      date: randomDate(),
-      tickets: {
-        count: ticketsCount,
-        savings: ticketsSavings,
-        subtotal: ticketsSubtotal,
-      },
-      parking: {
-        express: {
-          count: expressCount,
-          subtotal: expressSubtotal,
-        },
-        standard: {
-          count,
-          subtotal,
-        },
-      },
-    });
+    const newBooking = createBookingData();
 
     return HttpResponse.json(
       { success: true, data: newBooking },
