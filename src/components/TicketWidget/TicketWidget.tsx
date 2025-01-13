@@ -18,6 +18,7 @@ export function TicketWidget() {
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
+  const [dayPrice] = useLocalStorage<1 | 2>("ticket-pass", 1);
   const [totalAdults, setTotalAdults] = useState(ticketData.totalAdults);
   const [totalKids, setTotalKids] = useState(ticketData.totalKids);
 
@@ -39,7 +40,7 @@ export function TicketWidget() {
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <p className="text-xs">Days</p>
-          <p className="font-bold">1</p>
+          <p className="font-bold">{dayPrice}</p>
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <TicketSelect
