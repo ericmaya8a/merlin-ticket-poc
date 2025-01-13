@@ -29,7 +29,7 @@ function randomDate() {
   startDate.setDate(startDate.getDate() + 1);
   const date = faker.date.between({
     from: startDate,
-    to: new Date(2025, 9, 20),
+    to: new Date(2025, 0, 31),
   });
   return date.toDateString();
 }

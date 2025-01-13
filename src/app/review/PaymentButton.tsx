@@ -8,12 +8,28 @@ import { useLocalStorage } from "usehooks-ts";
 
 export function PaymentButton() {
   const router = useRouter();
-  const [basket] = useLocalStorage<BasketType>("basket", initialStates.basket);
+  const [basket, , removeTicketBasket] = useLocalStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
+  const [, , removeTicketDate] = useLocalStorage<Date>(
+    "ticket-date",
+    new Date(),
+  );
+  const [, , removeTicketDescription] = useLocalStorage<TicketType>(
+    "ticket-desc",
+    initialStates.ticketDescription as TicketType,
+  );
+  const [, , removeTicketPass] = useLocalStorage<1 | 2>("ticket-pass", 1);
 
   async function handlePayment() {
     const { success, data } = await payVisit(basket);
 
     if (success) {
+      removeTicketBasket();
+      removeTicketDescription();
+      removeTicketDate();
+      removeTicketPass();
       router.push(`/confirmation?id=${data.id}`);
     }
   }
