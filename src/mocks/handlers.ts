@@ -26,8 +26,10 @@ function getRandomTickets() {
 }
 
 function randomDate() {
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() + 1);
   const date = faker.date.between({
-    from: new Date(),
+    from: startDate,
     to: new Date(2025, 9, 20),
   });
   return format(date, "EEEE dd LLL yyyy");
