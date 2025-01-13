@@ -5,7 +5,7 @@ import { db } from "./db";
 import { format } from "date-fns";
 
 function getRandomParking(isExpress?: boolean) {
-  const count = faker.number.int({ min: 0, max: 3 });
+  const count = faker.number.int({ min: 1, max: 3 });
   const subtotal =
     count *
     (isExpress
@@ -15,7 +15,7 @@ function getRandomParking(isExpress?: boolean) {
 }
 
 function getRandomTickets() {
-  const count = faker.number.int({ min: 0, max: 5 });
+  const count = faker.number.int({ min: 1, max: 5 });
   const subtotal = count * constants.tickets.ONLINE_PRICE;
   const savings = count * constants.tickets.GATE_PRICE - subtotal;
   return {
