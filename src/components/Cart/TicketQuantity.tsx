@@ -3,11 +3,11 @@
 import { initialStates } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import { Tag, Trash2 } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 import { TicketQuantityCounter } from "./TicketQuantityCounter";
 
 export function TicketQuantity() {
-  const [basket, setBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );

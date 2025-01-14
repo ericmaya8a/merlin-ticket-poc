@@ -3,10 +3,13 @@
 import { constants, initialStates } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import { Tag } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export default function VisitTotal() {
-  const [basket] = useLocalStorage<BasketType>("basket", initialStates.basket);
+  const [basket] = useSessionStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
   const subtotal =
     basket.tickets.subtotal +
     basket.parking.express.subtotal +

@@ -1,10 +1,10 @@
 "use client";
 
 import { Ticket } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export default function TicketPass() {
-  const [dayPrice] = useLocalStorage<1 | 2>("ticket-pass", 1);
+  const [dayPrice] = useSessionStorage<1 | 2>("ticket-pass", 1);
 
   return (
     <div className="flex items-center gap-2">

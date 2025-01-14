@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { constants, initialStates } from "@/lib/constants";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 import { OptionItem } from "./OptionItem";
 
 interface ageOptionsProps {
@@ -23,11 +23,11 @@ export function AgeOptions({
     { id: "Y", text: "Young kids (Age 2 - 7)", count: 0 },
     { id: "T", text: "Toddlers (Under 2)", count: 0 },
   ]);
-  const [basket, setBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );
-  const [ticketData, setTicketData] = useLocalStorage<TicketType>(
+  const [ticketData, setTicketData] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );

@@ -3,10 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { initialStates } from "@/lib/constants";
 import { useRouter } from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export function ContinueButton() {
-  const [basket] = useLocalStorage<BasketType>("basket", initialStates.basket);
+  const [basket] = useSessionStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
   const router = useRouter();
 
   return (

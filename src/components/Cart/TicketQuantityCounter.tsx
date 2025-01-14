@@ -2,14 +2,14 @@
 
 import { Counter } from "@/components/Counter/Counter";
 import { constants, initialStates } from "@/lib/constants";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export function TicketQuantityCounter() {
-  const [basket, setBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );
-  const [, setTicketData] = useLocalStorage<TicketType>(
+  const [, setTicketData] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );

@@ -3,10 +3,10 @@
 import { CalendarModal } from "@/components/CalendarModal/CalendarModal";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export function DateInfo() {
-  const [ticketDate, setTicketDate] = useLocalStorage<Date>(
+  const [ticketDate, setTicketDate] = useSessionStorage<Date>(
     "ticket-date",
     new Date(),
   );

@@ -3,12 +3,12 @@
 import { initialStates } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import { Gauge, ParkingCircle, Trash2 } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 import { ParkingQuantityExpressCounter } from "./ParkingQuantityExpressCounter";
 import { ParkingQuantityStandardCounter } from "./ParkingQuantityStandardCounter";
 
 export function ParkingQuantity() {
-  const [basket, setBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );

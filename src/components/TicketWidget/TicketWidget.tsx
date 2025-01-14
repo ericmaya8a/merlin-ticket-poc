@@ -4,21 +4,21 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 import { CalendarSelect } from "./CalendarSelect";
 import { TicketSelect } from "./TicketSelect";
 import { initialStates } from "@/lib/constants";
 
 export function TicketWidget() {
-  const [ticketDate, setTicketDate] = useLocalStorage<Date>(
+  const [ticketDate, setTicketDate] = useSessionStorage<Date>(
     "ticket-date",
     new Date(),
   );
-  const [ticketData] = useLocalStorage<TicketType>(
+  const [ticketData] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
-  const [dayPrice] = useLocalStorage<1 | 2>("ticket-pass", 1);
+  const [dayPrice] = useSessionStorage<1 | 2>("ticket-pass", 1);
   const [totalAdults, setTotalAdults] = useState(ticketData.totalAdults);
   const [totalKids, setTotalKids] = useState(ticketData.totalKids);
 

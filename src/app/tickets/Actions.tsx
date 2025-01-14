@@ -6,14 +6,14 @@ import { initialStates } from "@/lib/constants";
 import { format } from "date-fns";
 import { Calendar, Edit2, User } from "lucide-react";
 import { useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export function Actions() {
-  const [ticketDate, setTicketDate] = useLocalStorage<Date>(
+  const [ticketDate, setTicketDate] = useSessionStorage<Date>(
     "ticket-date",
     new Date(),
   );
-  const [ticketData] = useLocalStorage<TicketType>(
+  const [ticketData] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );

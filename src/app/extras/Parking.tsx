@@ -14,7 +14,7 @@ import {
 import { constants, initialStates } from "@/lib/constants";
 import Link from "next/link";
 import { useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 interface Extras {
   id: string;
@@ -26,7 +26,10 @@ interface Extras {
 }
 
 export function Parking() {
-  const [basket] = useLocalStorage<BasketType>("basket", initialStates.basket);
+  const [basket] = useSessionStorage<BasketType>(
+    "basket",
+    initialStates.basket,
+  );
   const parkingExtrasInitial: Extras[] = [
     {
       id: "parking001",

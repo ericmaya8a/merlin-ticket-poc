@@ -4,23 +4,23 @@ import { Button } from "@/components/ui/button";
 import { initialStates } from "@/lib/constants";
 import { payVisit } from "@/lib/dal/actions/booking";
 import { useRouter } from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 
 export function PaymentButton() {
   const router = useRouter();
-  const [basket, , removeTicketBasket] = useLocalStorage<BasketType>(
+  const [basket, , removeTicketBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );
-  const [, , removeTicketDate] = useLocalStorage<Date>(
+  const [, , removeTicketDate] = useSessionStorage<Date>(
     "ticket-date",
     new Date(),
   );
-  const [, , removeTicketDescription] = useLocalStorage<TicketType>(
+  const [, , removeTicketDescription] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
-  const [, , removeTicketPass] = useLocalStorage<1 | 2>("ticket-pass", 1);
+  const [, , removeTicketPass] = useSessionStorage<1 | 2>("ticket-pass", 1);
 
   async function handlePayment() {
     const { success, data } = await payVisit(basket);

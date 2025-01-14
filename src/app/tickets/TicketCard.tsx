@@ -5,19 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { constants, initialStates } from "@/lib/constants";
 import { cn, formatCurrency } from "@/lib/utils";
-import { useLocalStorage } from "usehooks-ts";
+import { useSessionStorage } from "usehooks-ts";
 import { InfoModal } from "./InfoModal";
 
 export function TicketCard() {
-  const [basket, setBasket] = useLocalStorage<BasketType>(
+  const [basket, setBasket] = useSessionStorage<BasketType>(
     "basket",
     initialStates.basket,
   );
-  const [ticketData] = useLocalStorage<TicketType>(
+  const [ticketData] = useSessionStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
-  const [dayPrice, setDayPrice] = useLocalStorage<1 | 2>("ticket-pass", 1);
+  const [dayPrice, setDayPrice] = useSessionStorage<1 | 2>("ticket-pass", 1);
   const isOneDayTicket = dayPrice === 1;
   const header = isOneDayTicket ? "1 day ticket" : "2 day ticket";
   const totalSelectedTickets = ticketData.totalAdults + ticketData.totalKids;
