@@ -13,7 +13,7 @@ export function Actions() {
     "ticket-date",
     new Date(),
   );
-  const [ticketData, setTicketData] = useLocalStorage<TicketType>(
+  const [ticketData] = useLocalStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
@@ -40,8 +40,6 @@ export function Actions() {
         }
       />
       <TicketModal
-        ticketData={ticketData}
-        setTicketData={setTicketData}
         setTotalAdults={setTotalAdults}
         setTotalKids={setTotalKids}
         trigger={

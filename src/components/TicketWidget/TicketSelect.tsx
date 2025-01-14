@@ -9,16 +9,12 @@ import {
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface TicketSelectProps {
-  ticketData: TicketType;
-  setTicketData: Dispatch<SetStateAction<TicketType>>;
   totalAdults: number;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
 }
 
 export function TicketSelect({
-  ticketData,
-  setTicketData,
   totalAdults,
   setTotalAdults,
   setTotalKids,
@@ -35,8 +31,6 @@ export function TicketSelect({
       </PopoverTrigger>
       <PopoverContent>
         <AgeOptions
-          ticketData={ticketData}
-          setTicketData={setTicketData}
           setTotalAdults={setTotalAdults}
           setTotalKids={setTotalKids}
           setIsOpen={setIsOpen}

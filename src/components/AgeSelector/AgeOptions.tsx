@@ -7,16 +7,12 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 interface ageOptionsProps {
-  ticketData: TicketType;
-  setTicketData: Dispatch<SetStateAction<TicketType>>;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export function AgeOptions({
-  ticketData,
-  setTicketData,
   setTotalAdults,
   setTotalKids,
   setIsOpen,
@@ -30,6 +26,10 @@ export function AgeOptions({
   const [basket, setBasket] = useLocalStorage<BasketType>(
     "basket",
     initialStates.basket,
+  );
+  const [ticketData, setTicketData] = useLocalStorage<TicketType>(
+    "ticket-desc",
+    initialStates.ticketDescription as TicketType,
   );
 
   function handleChange(id: AgeOptionType["id"], val: number) {

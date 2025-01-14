@@ -11,17 +11,13 @@ import {
 import { Dispatch, ReactNode, SetStateAction, useState } from "react";
 
 interface TicketModalProps {
-  ticketData: TicketType;
   trigger: ReactNode;
-  setTicketData: Dispatch<SetStateAction<TicketType>>;
   setTotalAdults: Dispatch<SetStateAction<number>>;
   setTotalKids: Dispatch<SetStateAction<number>>;
 }
 
 export function TicketModal({
-  ticketData,
   trigger,
-  setTicketData,
   setTotalAdults,
   setTotalKids,
 }: TicketModalProps) {
@@ -36,8 +32,6 @@ export function TicketModal({
           Who is coming?
         </DialogDescription>
         <AgeOptions
-          ticketData={ticketData}
-          setTicketData={setTicketData}
           setTotalAdults={setTotalAdults}
           setTotalKids={setTotalKids}
           setIsOpen={setIsOpen}

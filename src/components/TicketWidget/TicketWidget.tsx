@@ -14,7 +14,7 @@ export function TicketWidget() {
     "ticket-date",
     new Date(),
   );
-  const [ticketData, setTicketData] = useLocalStorage<TicketType>(
+  const [ticketData] = useLocalStorage<TicketType>(
     "ticket-desc",
     initialStates.ticketDescription as TicketType,
   );
@@ -44,8 +44,6 @@ export function TicketWidget() {
         </div>
         <div className="grow border border-l-black bg-white p-2 text-[#1E274A]">
           <TicketSelect
-            ticketData={ticketData}
-            setTicketData={setTicketData}
             totalAdults={totalAdults}
             setTotalAdults={setTotalAdults}
             setTotalKids={setTotalKids}
