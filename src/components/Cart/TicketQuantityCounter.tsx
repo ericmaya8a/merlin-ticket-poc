@@ -1,8 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Counter2 } from "@/components/Counter/Counter2";
 import { constants, initialStates } from "@/lib/constants";
-import { Minus, Plus } from "lucide-react";
 import { useLocalStorage } from "usehooks-ts";
 
 export function TicketQuantityCounter() {
@@ -76,19 +75,11 @@ export function TicketQuantityCounter() {
   }
 
   return (
-    <div className="flex items-center justify-between gap-2">
-      <Button
-        variant="destructive"
-        disabled={basket.tickets.count <= 0}
-        size="icon"
-        onClick={handleMinus}
-      >
-        <Minus />
-      </Button>
-      <span className="font-bold">{basket.tickets.count}</span>
-      <Button variant="destructive" size="icon" onClick={handleAdd}>
-        <Plus />
-      </Button>
-    </div>
+    <Counter2
+      count={basket.tickets.count}
+      isMinusDisabled={basket.tickets.count <= 0}
+      onAdd={handleAdd}
+      onMinus={handleMinus}
+    />
   );
 }
