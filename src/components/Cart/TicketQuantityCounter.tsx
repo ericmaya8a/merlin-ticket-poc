@@ -1,6 +1,6 @@
 "use client";
 
-import { Counter2 } from "@/components/Counter/Counter2";
+import { Counter } from "@/components/Counter/Counter";
 import { constants, initialStates } from "@/lib/constants";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -75,11 +75,12 @@ export function TicketQuantityCounter() {
   }
 
   return (
-    <Counter2
+    <Counter
       count={basket.tickets.count}
       isMinusDisabled={basket.tickets.count <= 0}
       onAdd={handleAdd}
       onMinus={handleMinus}
+      isCritical
     />
   );
 }

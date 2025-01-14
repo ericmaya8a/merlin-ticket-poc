@@ -1,6 +1,6 @@
 "use client";
 
-import { Counter2 } from "@/components/Counter/Counter2";
+import { Counter } from "@/components/Counter/Counter";
 import { constants, initialStates } from "@/lib/constants";
 import { useLocalStorage } from "usehooks-ts";
 
@@ -37,11 +37,12 @@ export function ParkingQuantityExpressCounter() {
   }
 
   return (
-    <Counter2
+    <Counter
       count={basket.parking.express.count}
       isMinusDisabled={basket.parking.express.count <= 0}
       onAdd={handleAdd}
       onMinus={handleMinus}
+      isCritical
     />
   );
 }

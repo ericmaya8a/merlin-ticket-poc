@@ -1,10 +1,10 @@
 "use client";
 
-import { Counter } from "@/components/Counter/Counter";
 import { Button } from "@/components/ui/button";
 import { constants, initialStates } from "@/lib/constants";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { OptionItem } from "./OptionItem";
 
 interface ageOptionsProps {
   setTotalAdults: Dispatch<SetStateAction<number>>;
@@ -85,11 +85,8 @@ export function AgeOptions({
 
   return (
     <div>
-      {ticketData.options.map(({ id, text, count }) => (
-        <div key={id} className="flex items-center justify-between px-1 py-2">
-          <span className="text-sm">{text}</span>
-          <Counter count={count} onChange={(val) => handleChange(id, val)} />
-        </div>
+      {ticketData.options.map((option) => (
+        <OptionItem key={option.id} option={option} onChange={handleChange} />
       ))}
       <Button
         className="mt-4 w-full font-bold"
