@@ -1,7 +1,7 @@
 import { server } from "@/mocks/node";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTheme } from "@/services/theme";
