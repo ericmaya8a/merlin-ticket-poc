@@ -36,14 +36,16 @@ export default async function RootLayout({
 }>) {
   server.listen();
 
-  if (routing.locales.includes(params.lang as never)) {
+  const { locale, lang } = await params;
+
+  if (routing.locales.includes(lang as never)) {
     notFound();
   }
 
   const theme = await getTheme(tenant);
 
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <head>
         <Theme theme={theme} />
       </head>
