@@ -2,6 +2,10 @@ import { server } from "@/mocks/node";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { routing } from "@/i18n/routing";
+import { notFound } from "next/navigation";
+import { getTheme } from "@/services/theme";
+import { Theme } from "@/components/ui/theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,17 +25,28 @@ export const metadata: Metadata = {
   description: "Ticket flow PoC",
 };
 
-export default function RootLayout({
+const tenant = process.env.TENANT_ID;
+
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: { locale: string; lang: string };
 }>) {
   server.listen();
 
+  if (routing.locales.includes(params.lang as never)) {
+    notFound();
+  }
+
+  const theme = await getTheme(tenant);
+
   return (
     <html lang={params.locale}>
+      <head>
+        <Theme theme={theme} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
