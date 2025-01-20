@@ -32,7 +32,7 @@ export default async function RootLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string; lang: string };
+  params: Promise<{ locale: string; lang: string }>;
 }>) {
   server.listen();
 
