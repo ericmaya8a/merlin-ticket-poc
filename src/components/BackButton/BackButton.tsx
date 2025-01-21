@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/routing";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 interface BackButtonProps {
   title?: string;

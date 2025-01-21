@@ -6,6 +6,8 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { getTheme } from "@/services/theme";
 import { Theme } from "@/components/ui/theme";
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,26 +37,29 @@ export default async function RootLayout({
   params: Promise<{ locale: string; lang: string }>;
 }>) {
   server.listen();
+  const messages = await getMessages();
 
-  const { locale, lang } = await params;
+  const { lang } = await params;
 
-  if (routing.locales.includes(lang as never)) {
+  if (!routing.locales.includes(lang as never)) {
     notFound();
   }
 
   const theme = await getTheme(tenant);
 
   return (
-    <html lang={locale}>
+    <html lang={lang}>
       <head>
         <Theme theme={theme} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main className="min-h-screen font-[family-name:var(--font-geist-sans)]">
-          {children}
-        </main>
+        <NextIntlClientProvider messages={messages}>
+          <main className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+            {children}
+          </main>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
