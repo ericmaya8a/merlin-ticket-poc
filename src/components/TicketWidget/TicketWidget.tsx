@@ -8,6 +8,11 @@ import { useState } from "react";
 import { useSessionStorage } from "usehooks-ts";
 import { CalendarSelect } from "./CalendarSelect";
 import { TicketSelect } from "./TicketSelect";
+<<<<<<< HEAD
+=======
+import { initialStates } from "@/lib/constants";
+import TicketCalendar, { PricesData } from "../TicketCalendar/TicketCalendar";
+>>>>>>> 2405698 (feat: first commit with calendar component)
 
 export function TicketWidget() {
   const [ticketDate, setTicketDate] = useSessionStorage<Date>(
