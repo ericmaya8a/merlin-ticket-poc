@@ -25,11 +25,17 @@ export function Counter({
         disabled={isMinusDisabled}
         size="icon"
         onClick={onMinus}
+        aria-label="Decrease count"
       >
         <Minus />
       </Button>
       <span className="font-bold">{count}</span>
-      <Button variant="destructive" size="icon" onClick={onAdd}>
+      <Button
+        variant="destructive"
+        size="icon"
+        onClick={onAdd}
+        aria-label="Increase count"
+      >
         <Plus />
       </Button>
     </div>
