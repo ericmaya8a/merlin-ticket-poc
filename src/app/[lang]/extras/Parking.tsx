@@ -11,8 +11,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Link } from "@/i18n/routing";
 import { constants, initialStates } from "@/lib/constants";
-import Link from "next/link";
 import { useState } from "react";
 import { useSessionStorage } from "usehooks-ts";
 

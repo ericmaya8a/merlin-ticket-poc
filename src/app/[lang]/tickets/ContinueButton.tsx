@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useRouter } from "@/i18n/routing";
 import { initialStates } from "@/lib/constants";
-import { useRouter } from "next/navigation";
 import { useSessionStorage } from "usehooks-ts";
 
 export function ContinueButton() {
