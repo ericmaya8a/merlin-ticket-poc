@@ -4,6 +4,8 @@ import { constants } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import { format } from "date-fns";
 
+const cmsUrl = process.env.CMS_URL;
+
 interface BookingByIdResponse {
   success: boolean;
   data: BasketType & { id: string; date: string };
@@ -36,7 +38,7 @@ export async function getBookingById(id: string): Promise<DataResponse> {
   const {
     data: { tickets, parking, date },
   }: BookingByIdResponse = await (
-    await fetch(`http://localhost:3000/api/booking/${id}`)
+    await fetch(`${cmsUrl}/api/booking/${id}`)
   ).json();
   const gateTicketSubtotal = tickets.count * constants.tickets.GATE_PRICE;
   const total =

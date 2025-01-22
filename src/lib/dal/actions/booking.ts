@@ -5,8 +5,10 @@ interface PayVisitResponse {
   data: BasketType & { id: string };
 }
 
+const cmsUrl = process.env.CMS_URL;
+
 export async function payVisit(data: BasketType): Promise<PayVisitResponse> {
-  const response = await fetch("http://localhost:3000/api/booking", {
+  const response = await fetch(`${cmsUrl}/api/booking`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
