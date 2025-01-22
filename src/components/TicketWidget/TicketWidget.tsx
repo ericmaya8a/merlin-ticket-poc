@@ -3,21 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { initialStates } from "@/lib/constants";
-import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSessionStorage } from "usehooks-ts";
-import { CalendarSelect } from "./CalendarSelect";
 import { TicketSelect } from "./TicketSelect";
-<<<<<<< HEAD
-=======
-import { initialStates } from "@/lib/constants";
-import TicketCalendar, { PricesData } from "../TicketCalendar/TicketCalendar";
->>>>>>> 2405698 (feat: first commit with calendar component)
+import TicketCalendar from "../TicketCalendar/TicketCalendar";
 
 export function TicketWidget() {
-  const [ticketDate, setTicketDate] = useSessionStorage<Date>(
+  const [ticketDate, setTicketDate] = useSessionStorage<Date[]>(
     "ticket-date",
-    new Date(),
+    [],
   );
   const [ticketData] = useSessionStorage<TicketType>(
     "ticket-desc",
@@ -26,10 +20,32 @@ export function TicketWidget() {
   const [dayPrice] = useSessionStorage<1 | 2>("ticket-pass", 1);
   const [totalAdults, setTotalAdults] = useState(ticketData.totalAdults);
   const [totalKids, setTotalKids] = useState(ticketData.totalKids);
+  const [calendarData, setCalendarData] = useState({});
 
-  function handleSelectedDate(val?: Date) {
-    if (val) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/calendarDay", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setCalendarData(data);
+        }
+      } catch (error) {
+        console.error("Error fetching calendar data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  function handleSelectedDate(val?: Date | Date[]) {
+    if (Array.isArray(val)) {
       setTicketDate(val);
+    } else if (val instanceof Date) {
+      setTicketDate([val]);
     }
   }
 
@@ -38,10 +54,12 @@ export function TicketWidget() {
       <div className="flex flex-col sm:flex-row">
         <div className="flex grow">
           <div className="grow-[2] cursor-pointer rounded-tl-lg border border-b-0 border-r-0 border-[#144722] bg-white p-2 text-[#1E274A] sm:grow-[5] sm:rounded-l-lg sm:border-b-[1px]">
-            <CalendarSelect
-              ticketDate={format(ticketDate, "P")}
-              calendarDate={ticketDate}
-              onSelect={handleSelectedDate}
+            <TicketCalendar
+              selectedDates={ticketDate}
+              calendarData={calendarData || {}}
+              onFetchNext={async () => {}}
+              loading={false}
+              onApply={handleSelectedDate}
             />
           </div>
           <div className="grow rounded-tr-lg border border-b-0 border-[#144722] bg-white p-2 text-[#1E274A] sm:rounded-none sm:border-b-[1px] sm:border-r-0">
@@ -66,7 +84,7 @@ export function TicketWidget() {
             <Button
               className="hover:no-underline"
               variant="link"
-              disabled={ticketData.totalAdults < 1}
+              disabled={totalAdults < 1}
             >
               <Link className="font-bold text-white" href="/tickets">
                 Get tickets

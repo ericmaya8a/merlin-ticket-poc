@@ -8,6 +8,7 @@ import { TicketCalendarHeader } from "./TicketCalendarHeader";
 import { TicketCalendarFooter } from "./TicketCalendarFooter";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { formatSelectedDates } from "@/utils/dateUtils";
 
 type DayInfo = {
   price: number | null;
@@ -19,12 +20,21 @@ type Props = {
   calendarData: PricesData | undefined;
   onFetchNext: () => Promise<void>;
   loading: boolean;
+  selectedDates: Date[];
+  onApply: (dates: Date[]) => void;
 };
 
 export type PricesData = Record<string, DayInfo>;
 
-const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
-  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+const TicketCalendar = ({
+  calendarData,
+  onFetchNext,
+  loading,
+  selectedDates,
+  onApply,
+}: Props) => {
+  const [currentSelection, setCurrentSelection] =
+    useState<Date[]>(selectedDates);
   const [areMultipleDays, setAreMultipleDays] = useState<boolean>(false);
   const [numberOfMonths, setNumberOfMonths] = useState(2);
   const [isContentMounted, setIsContentMounted] = useState(false);
@@ -36,7 +46,6 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
   const setRef = useCallback((node: HTMLDivElement | null) => {
     calendarContainerRef.current = node;
     if (node) {
-      console.log("Ref assigned:", node);
       setIsContentMounted(true);
     } else {
       setIsContentMounted(false);
@@ -50,8 +59,6 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
       calendarContainerRef.current;
 
     if (scrollTop + clientHeight >= scrollHeight - 1 && !loading) {
-      console.log("Reached the bottom of the calendar!");
-
       onFetchNext().then(() => {
         setNumberOfMonths(numberOfMonths + 1);
       });
@@ -75,25 +82,26 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
   }, [isContentMounted, numberOfMonths, loading]);
 
   const handleSelect = (date: Date) => {
-    if (!areMultipleDays || selectedDates.length === 2) {
-      setSelectedDates([date]);
+    if (!areMultipleDays || currentSelection.length === 2) {
+      setCurrentSelection([date]);
     } else {
-      const firstDate = selectedDates[0];
+      const firstDate = currentSelection[0];
       if (addDays(firstDate, 1).getTime() === date.getTime()) {
-        setSelectedDates([...selectedDates, date]);
+        setCurrentSelection([...currentSelection, date]);
       } else {
-        setSelectedDates([date]);
+        setCurrentSelection([date]);
       }
     }
   };
 
   const handleDaysOptionSelect = (option: boolean) => {
     setAreMultipleDays(option);
-    setSelectedDates([]);
+    setCurrentSelection([]);
   };
 
   const handleApply = () => {
-    console.log("Applied selection:", { selectedDates, areMultipleDays });
+    console.log("Applied selection:", { currentSelection, areMultipleDays });
+    onApply(currentSelection);
   };
 
   const renderCalendar = () => {
@@ -113,7 +121,7 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
               {...props}
               dateData={calendarData}
               onSelect={handleSelect}
-              selectedDates={selectedDates}
+              selectedDates={currentSelection}
             />
           ),
         }}
@@ -140,7 +148,12 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
     <>
       {isMobile ? (
         <Sheet>
-          <SheetTrigger>Open Calendar</SheetTrigger>
+          <SheetTrigger asChild>
+            <div>
+              <p className="text-start text-xs">Date of visit</p>
+              <p className="font-bold">{formatSelectedDates(selectedDates)}</p>
+            </div>
+          </SheetTrigger>
           <SheetContent className="p-4" side="bottom">
             <SheetTitle />
             <TicketCalendarHeader
@@ -153,7 +166,12 @@ const TicketCalendar = ({ calendarData, onFetchNext, loading }: Props) => {
         </Sheet>
       ) : (
         <Popover>
-          <PopoverTrigger>Open Calendar</PopoverTrigger>
+          <PopoverTrigger asChild>
+            <div>
+              <p className="text-start text-xs">Date of visit</p>
+              <p className="font-bold">{formatSelectedDates(selectedDates)}</p>
+            </div>
+          </PopoverTrigger>
           <PopoverContent className="w-full">
             <TicketCalendarHeader
               areMultipleDays={areMultipleDays}
